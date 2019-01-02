@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+    <id>assembly</id> <!--后缀名 如${artifactId}-${id}.tar.gz-->
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/src/main/bin</directory>
+            <outputDirectory>bin</outputDirectory> <!--根据上面指定的目录，将指定文件打到该bin目录下,主要是启动脚本 -->
+            <fileMode>0755</fileMode> <!--指定文件属性，使用八进制表达，分别为(User)(Group)(Other)所属属性，默认为 0644-->
+        </fileSet>
+    </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory> <!--默认的jar都在lib里-->
+        </dependencySet>
+    </dependencySets>
+</assembly>

@@ -1,0 +1,45 @@
+# 服务端口号
+server:
+  port: 8001
+
+# 数据库地址
+datasource:
+  url: localhost:3306/lifangkai
+
+spring:
+  application:
+    name: ms-assetprovider # 对外暴露的服务名称
+
+  datasource: # 数据库配置
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${datasource.url}?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+    username: root
+    password: lifangkai
+    hikari:
+      maximum-pool-size: 10 # 最大连接池数
+      max-lifetime: 1770000
+
+mybatis:
+  # 指定别名设置的包为所有entity
+  type-aliases-package: com.microservice.skeleton.vo
+  mapper-locations: # mapper映射文件位置
+    - classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true # 驼峰命名规范
+
+# 客户端注册进eureka服务列表里
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001:7001/eureka/
+  instance:
+    instance-id: 资产数据中心-8001  # 人性化显示出服务的信息
+    prefer-ip-address: true    # 访问路径可显示ip地址
+
+# 使用actuator来展示项目的基本信息
+info:
+  author.name: shengwu ni
+  app.name: microservice
+  server.port: ${server.port}
+  application.name: ${spring.application.name}
+
